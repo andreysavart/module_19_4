@@ -1,0 +1,129 @@
+(.venv) PS C:\Users\user\Urban_Classes\ChetinSergey\M19-Django\UrbanDjango> py manage.py makemigrations
+Migrations for 'task1':
+  task1\migrations\0002_customer_product.py
+    + Create model Customer
+    + Create model Product
+(.venv) PS C:\Users\user\Urban_Classes\ChetinSergey\M19-Django\UrbanDjango> py manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, task1
+Running migrations:
+  Applying task1.0002_customer_product... OK
+(.venv) PS C:\Users\user\Urban_Classes\ChetinSergey\M19-Django\UrbanDjango>       
+                                                                            py man
+age.py shell
+Python 3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from task1.models import Customer
+>>> Customer.object.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Customer' has no attribute 'object'. Did you mean: 'o
+bjects'?
+>>> Customer.objects.all()
+<QuerySet []>
+>>> Customer.objects.create(name='Sergey', city='Perm')
+<Customer: Sergey>
+>>> Customer.objects.create(name='Dmitriy', city='Perm')
+<Customer: Dmitriy>
+>>> Customer.objects.create(name='Polina', city='Moskow')
+<Customer: Polina>
+>>> Customer.objects.create(name='Maria', city='Kazan')   
+<Customer: Maria>
+>>> from task1.models import Product
+>>> Product.objects.create(title=Apples, amount=5, cost=10.1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Apples' is not defined
+>>> Product.objects.create(title='Apples', amount=5, cost=10.1)
+<Product: Product object (1)>
+>>> Product.objects.create(title='Potatos', amount=7, cost=5.5)   
+<Product: Product object (2)>
+>>> Product.objects.create(title='Milk', amount=3, cost=7.22)   
+<Product: Product object (3)>
+>>> Product.objects.create(title='Cake', amount=4, cost=18.4)   
+<Product: Product object (4)>
+>>> Product.objects.create(title='Candy', amount=1, cost=9.9)  
+<Product: Product object (5)>
+>>> Product.objects.create(title='Ice cream', amount=2, cost=11.11)
+<Product: Product object (6)>
+>>> customer_1=Customer.objects.get(id=1)
+>>> customer_2=Customer.objects.get(id=2)   
+>>> customer_3=Customer.objects.get(id=3)  
+>>> customer_4=Customer.objects.get(id=4) 
+>>> Product.objects.get(id=1).customer.set((customer_1) 
+... Product.objects.get(id=1).customer.set((customer_1))
+  File "<console>", line 1
+    Product.objects.get(id=1).customer.set((customer_1)
+                                          ^
+SyntaxError: '(' was never closed
+>>> Product.objects.get(id=2).customer.set((customer_1)) 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\Urban_Classes\ChetinSergey\M19-Django\.venv\Lib\site-package
+s\django\db\models\fields\related_descriptors.py", line 1325, in set
+    objs = tuple(objs)
+           ^^^^^^^^^^^
+TypeError: 'Customer' object is not iterable
+>>> Product.objects.get(id=2).customer.set((customer_2, customer_3))
+>>> Product.objects.get(id=3).customer.set((customer_1, customer_3)) 
+>>> Product.objects.get(id=4).customer.set((customer_2))              
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\user\Urban_Classes\ChetinSergey\M19-Django\.venv\Lib\site-package
+s\django\db\models\fields\related_descriptors.py", line 1325, in set
+    objs = tuple(objs)
+           ^^^^^^^^^^^
+TypeError: 'Customer' object is not iterable
+>>> Product.objects.get(id=4).customer.set((customer_2,))
+>>> Product.objects.get(id=5).customer.set((customer_4,))  
+>>> Product.objects.get(id=6).customer.set((customer_4,)) 
+>>> Product.objects.count()
+6
+>>> Product.objects.filter(cost=5.5)
+<QuerySet [<Product: Product object (2)>]>
+>>> item_1 = Product.objects.first()
+>>> item_1.title = Pears
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Pears' is not defined. Did you mean: 'vars'?
+>>> item_1.title = 'Pears'
+>>> item_1.cost = 7.77
+>>> item_2 = Product.objects.second()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'second'
+>>> item_1.save()
+>>> item_2 = Product.objects.second()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'second'
+>>> Product.objects.filter(title='Milk')
+<QuerySet [<Product: Product object (3)>]>
+>>> Product.objects.get(id=3)
+<Product: Product object (3)>
+>>> name = 'Banana'
+>>> cost = 8.08
+>>> save()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'save' is not defined
+>>> Product.objects.save()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Manager' object has no attribute 'save'
+>>> Product.objects.filter(title='Milk').update(title='Banana', cost=8.08)
+1
+>>> item_2=Product.objects.get(id=2)
+>>> item_2
+<Product: Product object (2)>
+>>> item_2.delete()
+(3, {'task1.Product_customer': 2, 'task1.Product': 1})
+>>> Product.object.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Product' has no attribute 'object'. Did you mean: 'objects'?
+>>> Product.objects.all()
+<QuerySet [<Product: Product object (1)>, <Product: Product object (3)>, <Product: Product object (4)>, <Product: Product object (5)>, <Product: Product object (6)>]>
+>>> exit()

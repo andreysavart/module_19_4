@@ -1,0 +1,12 @@
+INSERT INTO customer(customer_name, cyti) VALUES('Sergey', 'Perm');
+INSERT INTO customer(customer_name, cyti) VALUES('Dmitriy', 'Perm');
+INSERT INTO customer(customer_name, cyti) VALUES('Polina', 'Moscow');
+INSERT INTO customer(customer_name, cyti) VALUES('Maria', 'Kazan');
+
+
+INSERT INTO products(customer_id, products_name, amount, cost) VALUES(1, 'Apples', 5, 10.1);
+INSERT INTO products(customer_id, products_name, amount, cost) VALUES(1, 'Potatos', 7, 5.50);
+INSERT INTO products(customer_id, products_name, amount, cost) VALUES(2, 'Milk', 3, 7.22);
+INSERT INTO products(customer_id, products_name, amount, cost) VALUES(3, 'Cake', 4, 18.40);
+INSERT INTO products(customer_id, products_name, amount, cost) VALUES(4, 'Candy', 1, 9.90);
+INSERT INTO products(customer_id, products_name, amount, cost) VALUES(4, 'Ice cream', 2, 11.11);
